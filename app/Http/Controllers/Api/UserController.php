@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:user', ['except' => ['login', 'register']]);
     }
     public function login(Request $request)
     {
@@ -35,9 +36,15 @@ class UserController extends Controller
     protected function createNewToken($token)
     {
         return response()->json([
+            'success' => true,
             'access_token' => $token,
             'token_type' => 'Bearer',
             'user' => auth('user')->user()
         ]);
+    }
+
+    public function getSecurityInfomation()
+    {
+        return response()->json(['Address']);
     }
 }
