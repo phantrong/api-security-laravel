@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Faker\Factory;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     public function __construct()
     {
@@ -45,6 +44,6 @@ class UserController extends Controller
 
     public function getSecurityInfomation()
     {
-        return response()->json(['Address']);
+        return $this->sendResponse(Address::inRandomOrder()->first());
     }
 }

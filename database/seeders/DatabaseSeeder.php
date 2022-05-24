@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
+use Database\Factories\AddressFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,5 +32,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('admin123'),
             ]
         ]);
+
+        Address::factory()->count(3000)->create();
     }
 }
