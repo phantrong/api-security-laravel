@@ -9,7 +9,7 @@ class UserController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('auth:user', ['except' => ['login']]);
+        $this->middleware('jwt', ['except' => ['login']]);
     }
     public function login(Request $request)
     {

@@ -21,7 +21,11 @@ Route::group([
 ], function () {
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/logout', [UserController::class, 'logout']);
-    Route::get('/get-security', [UserController::class, 'getSecurityInfomation']);
+    Route::group([
+        'middleware' => 'jwt',
+    ], function () {
+        Route::get('/get-security', [UserController::class, 'getSecurityInfomation']);
+    });
 });
 
 Route::group([
