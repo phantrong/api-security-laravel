@@ -20,7 +20,7 @@ Route::group([
     'prefix' => 'user'
 ], function () {
     Route::post('/login', [UserController::class, 'login']);
-    Route::post('/logout', [AdminController::class, 'logout']);
+    Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/get-security', [UserController::class, 'getSecurityInfomation']);
 });
 

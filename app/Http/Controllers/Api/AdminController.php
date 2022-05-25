@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login']]);
     }
     public function login(Request $request)
     {
@@ -27,17 +27,17 @@ class AdminController extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        auth('admin')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }
 
     protected function createNewToken($token)
     {
-        return response()->json([
+        return $this->sendResponse([
+            'success' => true,
             'access_token' => $token,
-            'token_type' => 'Bearer',
-            'admin' => auth('admin')->user()
+            'token_type' => 'Bearer'
         ]);
     }
 }

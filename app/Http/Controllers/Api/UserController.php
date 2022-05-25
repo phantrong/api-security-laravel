@@ -9,7 +9,7 @@ class UserController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('auth:user', ['except' => ['login', 'register']]);
+        $this->middleware('auth:user', ['except' => ['login']]);
     }
     public function login(Request $request)
     {
@@ -27,18 +27,17 @@ class UserController extends BaseController
 
     public function logout()
     {
-        auth()->logout();
+        auth('user')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }
 
     protected function createNewToken($token)
     {
-        return response()->json([
+        return $this->sendResponse([
             'success' => true,
             'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => auth('user')->user()
+            'token_type' => 'Bearer'
         ]);
     }
 
